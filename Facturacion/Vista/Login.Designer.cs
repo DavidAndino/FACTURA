@@ -38,7 +38,7 @@
             this.Label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.passTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.hideButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -124,14 +124,15 @@
             this.passTextBox.Size = new System.Drawing.Size(148, 26);
             this.passTextBox.TabIndex = 1;
             // 
-            // button1
+            // hideButton
             // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(286, 92);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(30, 23);
-            this.button1.TabIndex = 14;
-            this.button1.UseVisualStyleBackColor = true;
+            this.hideButton.Image = ((System.Drawing.Image)(resources.GetObject("hideButton.Image")));
+            this.hideButton.Location = new System.Drawing.Point(286, 92);
+            this.hideButton.Name = "hideButton";
+            this.hideButton.Size = new System.Drawing.Size(30, 23);
+            this.hideButton.TabIndex = 14;
+            this.hideButton.UseVisualStyleBackColor = true;
+            this.hideButton.Click += new System.EventHandler(this.hideButton_Click);
             // 
             // Login
             // 
@@ -141,7 +142,7 @@
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(529, 203);
             this.ControlBox = false;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.hideButton);
             this.Controls.Add(this.passTextBox);
             this.Controls.Add(this.PictureBox1);
             this.Controls.Add(this.cancelButton);
@@ -172,7 +173,7 @@
         internal System.Windows.Forms.Label Label1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.TextBox passTextBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button hideButton;
     }
 }
 

@@ -33,6 +33,27 @@ namespace Vista
                 return;
             }
             errorProvider1.Clear();
+
+            //validacion en base de datos
+
+
+            //Mostrar menu
+            Menu menuFormulario = new Menu();//instanciando objeto de la clase Menu
+            this.Hide();//ocultando formulario de login
+            menuFormulario.Show();//mostrando formulario
+
+        }
+
+        private void hideButton_Click(object sender, EventArgs e)
+        {
+            if (passTextBox.PasswordChar == '*')//mostrando contrasenia
+            {
+                passTextBox.PasswordChar = '\0';//enviandola la propiedad "PasswordChar" el valor nulo. Esta contrapleca iguala a null
+            }
+            else
+            {
+                passTextBox.PasswordChar = '*';//volviendo a ocultar contra
+            }
         }
     }
 }
