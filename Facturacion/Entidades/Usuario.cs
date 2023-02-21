@@ -12,6 +12,7 @@ namespace Entidades
         public string role { get; set; }
         public DateTime creationDate { get; set; }
         public bool active { get; set; }
+        public byte[] photo { get; set; }
 
         //creando constructor vaio
         public Usuario()
@@ -19,7 +20,8 @@ namespace Entidades
 
         }
 
-        public Usuario(string userCode, string name, string password, string mail, string role, DateTime creationDate, bool active)
+        //creando constructor con parametros
+        public Usuario(string userCode, string name, string password, string mail, string role, DateTime creationDate, bool active, byte[] photo)
         {
             this.userCode = userCode;
             this.name = name;
@@ -28,6 +30,7 @@ namespace Entidades
             this.role = role;
             this.creationDate = creationDate;
             this.active = active;
+            this.photo = photo;
         }
     }
 }

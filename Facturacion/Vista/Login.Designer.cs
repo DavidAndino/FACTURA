@@ -46,7 +46,7 @@
             // PictureBox1
             // 
             this.PictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.PictureBox1.Location = new System.Drawing.Point(325, 33);
+            this.PictureBox1.Location = new System.Drawing.Point(357, 33);
             this.PictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PictureBox1.Name = "PictureBox1";
             this.PictureBox1.Size = new System.Drawing.Size(191, 109);
@@ -127,7 +127,7 @@
             // hideButton
             // 
             this.hideButton.Image = ((System.Drawing.Image)(resources.GetObject("hideButton.Image")));
-            this.hideButton.Location = new System.Drawing.Point(286, 92);
+            this.hideButton.Location = new System.Drawing.Point(308, 91);
             this.hideButton.Name = "hideButton";
             this.hideButton.Size = new System.Drawing.Size(30, 23);
             this.hideButton.TabIndex = 14;
@@ -140,7 +140,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(529, 203);
+            this.ClientSize = new System.Drawing.Size(561, 203);
             this.ControlBox = false;
             this.Controls.Add(this.hideButton);
             this.Controls.Add(this.passTextBox);
