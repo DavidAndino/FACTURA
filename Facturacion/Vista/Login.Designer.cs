@@ -59,12 +59,12 @@
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.Image = ((System.Drawing.Image)(resources.GetObject("cancelButton.Image")));
             this.cancelButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cancelButton.Location = new System.Drawing.Point(165, 138);
+            this.cancelButton.Location = new System.Drawing.Point(161, 138);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(104, 41);
+            this.cancelButton.Size = new System.Drawing.Size(71, 41);
             this.cancelButton.TabIndex = 3;
-            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Text = "Exit";
             this.cancelButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);

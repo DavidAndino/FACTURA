@@ -81,7 +81,7 @@
             this.ribbonControlAdv1.RibbonStyle = Syncfusion.Windows.Forms.Tools.RibbonStyle.Office2016;
             this.ribbonControlAdv1.SelectedTab = this.toolStripTabItem1;
             this.ribbonControlAdv1.ShowRibbonDisplayOptionButton = true;
-            this.ribbonControlAdv1.Size = new System.Drawing.Size(682, 117);
+            this.ribbonControlAdv1.Size = new System.Drawing.Size(953, 117);
             this.ribbonControlAdv1.SystemText.QuickAccessDialogDropDownName = "Start menu";
             this.ribbonControlAdv1.SystemText.RenameDisplayLabelText = "&Display Name:";
             this.ribbonControlAdv1.TabIndex = 0;
@@ -280,7 +280,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(682, 355);
+            this.ClientSize = new System.Drawing.Size(953, 591);
             this.Controls.Add(this.ribbonControlAdv1);
             this.IsMdiContainer = true;
             this.Name = "Menu";
