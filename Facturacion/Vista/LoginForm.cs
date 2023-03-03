@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Datos;
+using Entidades;
+using System;
 using System.Windows.Forms;
 
 namespace Vista
 {
-    public partial class Login : Form
+    public partial class LoginForm : Form
     {
-        public Login()
+        public LoginForm()
         {
             InitializeComponent();
         }
@@ -35,12 +37,33 @@ namespace Vista
             errorProvider1.Clear();
 
             //validacion en base de datos
+            Login login = new Login(userTextBox.Text, passTextBox.Text);
+            Usuario user = new Usuario();
+            UserDB userDB = new UserDB();
 
+            user = userDB.Autenticacion(login);
 
-            //Mostrar menu
-            Menu menuFormulario = new Menu();//instanciando objeto de la clase Menu
-            this.Hide();//ocultando formulario de login
-            menuFormulario.Show();//mostrando formulario
+            //validando que el usuario exista en la base de datos
+            if (user != null)
+            {
+                if (user.active)
+                {
+                    //Mostrar menu
+                    MenuForm menuFormulario = new MenuForm();//instanciando objeto de la clase Menu
+                    this.Hide();//ocultando formulario de login
+                    menuFormulario.Show();//mostrando formulario
+                }
+                else
+                {
+                    MessageBox.Show("The user is not active right now", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("The user's name or password is incorrect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
         }
 
@@ -48,7 +71,7 @@ namespace Vista
         {
             if (passTextBox.PasswordChar == '*')//mostrando contrasenia
             {
-                passTextBox.PasswordChar = '\0';//enviandola la propiedad "PasswordChar" el valor nulo. Esta contrapleca iguala a null
+                passTextBox.PasswordChar = '\0';//enviando a la propiedad "PasswordChar" el valor nulo. Esta contrapleca iguala a null
             }
             else
             {
