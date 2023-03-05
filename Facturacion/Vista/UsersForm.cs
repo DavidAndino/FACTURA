@@ -1,4 +1,6 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,14 +13,18 @@ namespace Vista
             InitializeComponent();
         }
 
-        //variable global
+        //variables global
         string operation = "";
+        DataTable dt = new DataTable();//objeto que recibira el metodo "bringUsers"
+        UserDB userFromDB = new UserDB();//este objeto servira para ejecutar sentencias desde varias partes de codigo
+        Usuario user = new Usuario();//creando objeto de la clase "Usuario" que se pasara al metodo que se insertara en la BD
 
         private void newButton_Click(object sender, System.EventArgs e)
         {
             enableControls();//invocando procedimiento que habilita controles si el usuario da click en "New"
             codeTextBox.Focus();//enviando foco a la primera casilla
             operation = "New";
+            modButton.Enabled = false;//desabilitando boton de modificar si se apreta "Nuevo"
         }
 
         private void enableControls()
@@ -38,6 +44,8 @@ namespace Vista
         {
             disableControls();//invocando metodo que bloquea los controles si el  usuario da click en "cancel"
             cleanControls();//invocando metodo que limpia controles si el usuario cancela
+            roleComboBox.Enabled = true;
+
         }
 
         private void disableControls()
@@ -50,6 +58,7 @@ namespace Vista
             activeCheckBox.Enabled = false;
             searchPicButton.Enabled = false;
             saveButton.Enabled = false;
+            cancelButton.Enabled = false;
         }
 
         private void cleanControls()
@@ -102,7 +111,6 @@ namespace Vista
                 }
                 errorProvider1.Clear();
 
-                Usuario user = new Usuario();//crando objeto de la clase "Usuario" que se pasara al metodo que se insertara en la BD
                 user.userCode = codeTextBox.Text;
                 user.name = nameTextBox.Text;
                 user.password = passTextBox.Text;
@@ -118,6 +126,23 @@ namespace Vista
                                                                                                      * MemoryStream (alojadorImagen) through metodo "Save" */
                     user.photo = alojadorImagen.GetBuffer();//pasando lo alojado en "alojadorImagen" a la propiedad "Photo" de la clase "Usuario"
                 }
+
+                //insertar en la DB
+                bool inserts = userFromDB.insert(user);//el objeto "inserts" traera un true o false, desde la clase UserDB
+
+                //validando que el valor de  "inserts" sea true para insertar el registro
+                if (inserts)
+                {
+                    cleanControls();
+                    disableControls();
+                    bringUsersForm();
+                    MessageBox.Show("The registry has been saved");
+                }
+                else
+                {
+                    MessageBox.Show("The operation failed while trying to save the registry");
+                }
+
             }//decision de boton guardar o save
 
             else if (operation == "Mod")
@@ -143,6 +168,17 @@ namespace Vista
                 pictureBox1.Image = Image.FromFile(dialog.FileName);/*asignando imagen al picturebox Metodo "FromFile" convierte la imagen capturada y 
                                                                      se la  pasa al picturebox*/
             }
+        }
+
+        private void UsersForm_Load(object sender, System.EventArgs e)
+        {
+            bringUsersForm();
+        }
+
+        private void bringUsersForm()
+        {
+            dt = userFromDB.bringUsers();//trayendo todos los usuarios
+            usersDataGridView.DataSource = dt;//llenando el DataGridView con cada registro que se ingrese, edite o elimine
         }
     }
 }

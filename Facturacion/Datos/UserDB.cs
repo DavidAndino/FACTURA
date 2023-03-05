@@ -1,6 +1,7 @@
 ﻿using Entidades;
 using MySql.Data.MySqlClient;
 using System;
+using System.Data;
 using System.Text;
 namespace Datos
 
@@ -56,16 +57,56 @@ namespace Datos
             return user;//se devuelve el objeto "user" de  la clase "Usuario", para validar que todos los datos sean correctos a la hora de ingresar a la DB
         }
 
-        //creando metodo que permitiera la manipulacion del formulario de usuario
-        public Boolean insertar(Usuario user)
+        //creando metodo que permitira la inserción de datos en la DB
+        public Boolean insert(Usuario user)
         {
-            Boolean inserted = false;
+            bool inserted = false;
             try
             {
                 StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
-                sql.Append("INSERT INTO * FROM user VALUES");/*seleccionando un dato de la tabla en la DB. 
+                sql.Append("INSERT INTO user VALUES");/*seleccionando un dato de la tabla en la DB. 
                                                   * "user" nombre de la tabla en el motor de DB. */
                 sql.Append("(@UserCode, @Name, @Password, @Mail, @Role, @CreationDate, @Active, @Photo); ");//sentencias para insertar un new registro en la DB
+
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql
+                {
+                    conexion.Open();//abriendo conexion
+
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), conexion))
+                    {
+                        comando.CommandType = CommandType.Text;/*especificando el tipo de comando que se ejecutara
+                                                                            en este caso es un comando de texto, pues ee el codigo varchar el que se ingresa*/
+                        //estas sentencias se tienen que hacer en el orden que sale en la tabla del motor de la DB
+                        comando.Parameters.Add("@UserCode", MySqlDbType.VarChar, 50).Value = user.userCode;//pasando parametros al objeto de comando. 1ro: nombre parametro. 2do:tipo dato
+                        comando.Parameters.Add("@Name", MySqlDbType.VarChar, 50).Value = user.name;
+                        comando.Parameters.Add("@Password", MySqlDbType.VarChar, 80).Value = user.password;
+                        comando.Parameters.Add("@Mail", MySqlDbType.VarChar, 20).Value = user.mail;
+                        comando.Parameters.Add("@Role", MySqlDbType.VarChar, 25).Value = user.role;
+                        comando.Parameters.Add("@CreationDate", MySqlDbType.DateTime).Value = user.creationDate;
+                        comando.Parameters.Add("@Active", MySqlDbType.Bit).Value = user.active;
+                        comando.Parameters.Add("@Photo", MySqlDbType.LongBlob).Value = user.photo;
+                        comando.ExecuteNonQuery();//se va a ejecutar, pero no se devolver algun registro
+                        inserted = true;
+
+                    }//esta sentencia de comando ejecuta la sentencia de sql
+                }//esta sentencia ayuda a que, cuando termina la conexion con la DB, cerrar la conexion automatically
+            }
+            catch (System.Exception)
+            {
+            }
+
+            return inserted;//
+        }
+        public bool edit(Usuario user)
+        {
+            Boolean edited = false;
+            try
+            {
+                StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
+                sql.Append("UPDATE user SET");//sentencia para editar algun registro
+
+                sql.Append("Name = @Name, Password = @Password, Mail = @Mail, Role = @Role, Active = @Active, @Photo ");//sentencias para editar todos los registros en la DB
+                sql.Append("WHERE UserCode = @UserCode;");//solo permitiendo que se edite un codigo de usuario  en especifico
 
                 using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql
                 {
@@ -85,6 +126,7 @@ namespace Datos
                         comando.Parameters.Add("@Active", MySqlDbType.Bit).Value = user.active;
                         comando.Parameters.Add("@Photo", MySqlDbType.LongBlob).Value = user.photo;
                         comando.ExecuteNonQuery();//se va a ejecutar, pero no se devolver algun registro
+                        edited = true;
 
                     }//esta sentencia de comando ejecuta la sentencia de sql
                 }//esta sentencia ayuda a que, cuando termina la conexion con la DB, cerrar la conexion automatically
@@ -93,8 +135,66 @@ namespace Datos
             {
             }
 
-            return inserted;//se devuelve el objeto "user" de  la clase "Usuario", para validar que todos los datos sean correctos a la hora de ingresar a la DB
+            return edited;//se devuelve la variable "edited"
+        }
+        public bool delete(string userCode)
+        {
+            Boolean deleted = false;
+            try
+            {
+                StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
+                sql.Append("DELETE FROM user");//eliminar de la tabla "user" de la base de datos
+                sql.Append("WHERE UserCode = @UserCode;");
+
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql
+                {
+                    conexion.Open();//abriendo conexion
+
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), conexion))
+                    {
+                        comando.CommandType = System.Data.CommandType.Text;/*especificando el tipo de comando que se ejecutara
+                                                                            en este caso es un comando de texto*/
+                        comando.Parameters.Add("@UserCode", MySqlDbType.VarChar, 50).Value = userCode;//pasando parametros al objeto de comando. 1ro: nombre parametro. 2do:tipo dato
+
+                        comando.ExecuteNonQuery();//se va a ejecutar, pero no se devolver algun registro
+                        deleted = true;
+
+                    }//esta sentencia de comando ejecuta la sentencia de sql
+                }//esta sentencia ayuda a que, cuando termina la conexion con la DB, cerrar la conexion automatically
+            }
+            catch (System.Exception)
+            {
+            }
+
+            return deleted;//se devuelve el objeto "user" de  la clase "Usuario", para validar que todos los datos sean correctos a la hora de ingresar a la DB
+        }
+        public DataTable bringUsers()//la clase "DataTable" trae una tabla completa de registros. Recommended para aplicaciones small, es decir, de pocos registros
+        {
+            DataTable dt = new DataTable();//instanciando objeto de esta clase
+            try
+            {
+                StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
+                sql.Append("SELECT * FROM user");//sentencia para traer registros de la tabla de la base de datos
+
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql
+                {
+                    conexion.Open();//abriendo conexion
+
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), conexion))
+                    {
+                        comando.CommandType = System.Data.CommandType.Text;//*especificando el tipo de comando que se ejecutara
+
+                        MySqlDataReader dr = comando.ExecuteReader();//trayendo los datos
+                        dt.Load(dr);//llenando el objeto de tipo "DataTable" con los registros almacenados en el objeto "dr" 
+                    }//esta sentencia de comando ejecuta la sentencia de sql
+                }//esta sentencia ayuda a que, cuando termina la conexion con la DB, cerrar la conexion automatically
+            }
+            catch (System.Exception)
+            {
+            }
+
+            return dt;//se devuelve el objeto "user" de  la clase "Usuario", para validar que todos los datos sean correctos a la hora de ingresar a la DB
         }
     }
 }
-}
+

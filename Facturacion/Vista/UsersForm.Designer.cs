@@ -205,6 +205,7 @@
             // 
             // saveButton
             // 
+            this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(240, 295);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(104, 32);
@@ -215,6 +216,7 @@
             // 
             // deleteButton
             // 
+            this.deleteButton.Enabled = false;
             this.deleteButton.Location = new System.Drawing.Point(350, 295);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(104, 32);
@@ -224,6 +226,7 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.Enabled = false;
             this.cancelButton.Location = new System.Drawing.Point(462, 295);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(104, 32);
@@ -234,6 +237,8 @@
             // 
             // usersDataGridView
             // 
+            this.usersDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.usersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.usersDataGridView.Location = new System.Drawing.Point(19, 344);
             this.usersDataGridView.Name = "usersDataGridView";
@@ -273,6 +278,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UsersForm";
             this.Text = "Users";
+            this.Load += new System.EventHandler(this.UsersForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
