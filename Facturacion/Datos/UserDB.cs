@@ -45,7 +45,12 @@ namespace Datos
                             user.role = capturadorRegistros["Role"].ToString();
                             user.creationDate = (DateTime)capturadorRegistros["CreationDate"];//verificar ese casting
                             user.active = Convert.ToBoolean(capturadorRegistros["Active"]);
-                            user.photo = (byte[])capturadorRegistros["Photo"];//haciendo "casting"
+                            //validando que el campo de foto no venga nulo, para que el compilador no tire la excepcion de que no viene foto
+                            if (capturadorRegistros["Photo"].GetType() != typeof(DBNull))//si el tipo de dato que trae el objeto "capturadorRegistros" es != nulo
+                            {
+                                user.photo = (byte[])capturadorRegistros["Photo"];//haciendo "casting"
+                            }
+
                         }
                     }//esta sentencia de comando ejecuta la sentencia de sql
                 }//esta sentencia ayuda a que, cuando termina la conexion con la DB, cerrar la conexion automatically
@@ -99,14 +104,14 @@ namespace Datos
         }
         public bool edit(Usuario user)
         {
-            Boolean edited = false;
+            bool edited = false;
             try
             {
                 StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
-                sql.Append("UPDATE user SET");//sentencia para editar algun registro
+                sql.Append(" UPDATE user SET ");//sentencia para editar algun registro
 
-                sql.Append("Name = @Name, Password = @Password, Mail = @Mail, Role = @Role, Active = @Active, @Photo ");//sentencias para editar todos los registros en la DB
-                sql.Append("WHERE UserCode = @UserCode;");//solo permitiendo que se edite un codigo de usuario  en especifico
+                sql.Append(" Name = @Name, Password = @Password, Mail = @Mail, Role = @Role, Active = @Active, Photo = @Photo ");//sentencias para editar todos los registros en la DB
+                sql.Append(" WHERE UserCode = @UserCode; ");//solo permitiendo que se edite un codigo de usuario en especifico
 
                 using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql
                 {
@@ -122,10 +127,9 @@ namespace Datos
                         comando.Parameters.Add("@Password", MySqlDbType.VarChar, 80).Value = user.password;
                         comando.Parameters.Add("@Mail", MySqlDbType.VarChar, 20).Value = user.mail;
                         comando.Parameters.Add("@Role", MySqlDbType.VarChar, 25).Value = user.role;
-                        comando.Parameters.Add("@CreationDate", MySqlDbType.DateTime).Value = user.creationDate;
                         comando.Parameters.Add("@Active", MySqlDbType.Bit).Value = user.active;
                         comando.Parameters.Add("@Photo", MySqlDbType.LongBlob).Value = user.photo;
-                        comando.ExecuteNonQuery();//se va a ejecutar, pero no se devolver algun registro
+                        comando.ExecuteNonQuery();//se va a ejecutar, pero no se devolvera algun registro
                         edited = true;
 
                     }//esta sentencia de comando ejecuta la sentencia de sql
@@ -139,12 +143,12 @@ namespace Datos
         }
         public bool delete(string userCode)
         {
-            Boolean deleted = false;
+            bool deleted = false;
             try
             {
                 StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
-                sql.Append("DELETE FROM user");//eliminar de la tabla "user" de la base de datos
-                sql.Append("WHERE UserCode = @UserCode;");
+                sql.Append(" DELETE FROM user ");//eliminar de la tabla "user" de la base de datos
+                sql.Append(" WHERE UserCode = @UserCode; ");
 
                 using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql
                 {
@@ -194,6 +198,38 @@ namespace Datos
             }
 
             return dt;//se devuelve el objeto "user" de  la clase "Usuario", para validar que todos los datos sean correctos a la hora de ingresar a la DB
+        }
+
+        //creando metodo que permita traer la imagen del user desde la base de datos. Acoplar todo> ctrl+mo
+        public byte[] photo(string userCode)//se traera mediante el codigo de usuario
+        {
+            byte[] photo = new byte[0];
+            try
+            {
+                StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
+                sql.Append("SELECT Photo FROM user WHERE UserCode = @UserCode");//sentencia para traer solo la foto de la tabla de la base de datos, tiene que estar escrito como alla
+
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql
+                {
+                    conexion.Open();//abriendo conexion
+
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), conexion))
+                    {
+                        comando.CommandType = System.Data.CommandType.Text;//*especificando el tipo de comando que se ejecutara
+                        comando.Parameters.Add("@UserCode", MySqlDbType.VarChar, 50).Value = userCode;
+                        MySqlDataReader dr = comando.ExecuteReader();//trayendo los datos
+                        if (dr.Read())//si lee algun archivo existente en el objeto de tipo MySqlDataReader 
+                        {
+                            photo = (byte[])dr["Photo"];//entonce se le pasa lo que trae el objeto al arreglo de bytes que se devolvera
+                        }
+                    }//esta sentencia de comando ejecuta la sentencia de sql
+                }//esta sentencia ayuda a que, cuando termina la conexion con la DB, cerrar la conexion automatically
+            }
+            catch (System.Exception)
+            {
+            }
+
+            return photo;//se devuelve el objeto "user" de  la clase "Usuario", para validar que todos los datos sean correctos a la hora de ingresar a la DB
         }
     }
 }

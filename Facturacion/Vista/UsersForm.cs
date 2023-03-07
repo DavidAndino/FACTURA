@@ -1,7 +1,9 @@
 ﻿using Datos;
 using Entidades;
+using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Vista
@@ -13,7 +15,7 @@ namespace Vista
             InitializeComponent();
         }
 
-        //variables global
+        //variables globales
         string operation = "";
         DataTable dt = new DataTable();//objeto que recibira el metodo "bringUsers"
         UserDB userFromDB = new UserDB();//este objeto servira para ejecutar sentencias desde varias partes de codigo
@@ -147,7 +149,35 @@ namespace Vista
 
             else if (operation == "Mod")
             {
+                user.userCode = codeTextBox.Text;
+                user.name = nameTextBox.Text;
+                user.password = passTextBox.Text;
+                user.role = roleComboBox.Text;
+                user.mail = mailTextBox.Text;
+                user.active = activeCheckBox.Checked;//la propiedad "checked" es de tipo booleano
 
+                //psando imagen del pictureBox a la propiedad "Photo" de la clase "Usuario
+                if (pictureBox1.Image != null)
+                {
+                    System.IO.MemoryStream alojadorImagen = new System.IO.MemoryStream();//convirtiendo imagen a arreglo de bytex, como se definio desde el principio
+                    pictureBox1.Image.Save(alojadorImagen, System.Drawing.Imaging.ImageFormat.Jpeg);/*pasandole la imagen del pictureBox al objeto de la clase 
+                                                                                                     * MemoryStream (alojadorImagen) through metodo "Save" */
+                    user.photo = alojadorImagen.GetBuffer();//pasando lo alojado en "alojadorImagen" a la propiedad "Photo" de la clase "Usuario"
+                }
+
+                bool mod = userFromDB.edit(user);
+
+                if (mod)
+                {
+                    cleanControls();
+                    disableControls();
+                    bringUsersForm();
+                    MessageBox.Show("The registry was updated successfully");
+                }
+                else
+                {
+                    MessageBox.Show("It was not possible to update the registry");
+                }
             }
 
         }
@@ -155,6 +185,30 @@ namespace Vista
         private void modButton_Click(object sender, System.EventArgs e)
         {
             operation = "Mod";
+            //pasando el registro seleccionado a cada textBox y combo y check
+            if (usersDataGridView.SelectedRows.Count > 0)//si el user selecciono al menos una fila
+            {
+                //el orden de esto de llenar los textbox etc  de nuevo con los datos que hay en la celda seleccionada en el dataGrid, se hace con el de la DB en MySql
+                codeTextBox.Text = usersDataGridView.CurrentRow.Cells["UserCode"].Value.ToString();//pasando los datos que contiene la celda de la fila seleccionada
+                nameTextBox.Text = usersDataGridView.CurrentRow.Cells["Name"].Value.ToString();
+                passTextBox.Text = usersDataGridView.CurrentRow.Cells["Password"].Value.ToString();
+                mailTextBox.Text = usersDataGridView.CurrentRow.Cells["Mail"].Value.ToString();
+                roleComboBox.Text = usersDataGridView.CurrentRow.Cells["Role"].Value.ToString();
+                activeCheckBox.Checked = Convert.ToBoolean(usersDataGridView.CurrentRow.Cells["Active"].Value);
+                byte[] myPhoto = userFromDB.photo(usersDataGridView.CurrentRow.Cells["UserCode"].Value.ToString());
+
+                //validando que el vector "myPhoto" traiga una imagen
+                if (myPhoto.Length > 0)//si el user no tiene una foto en la DB, este arreglo devuelve un 0
+                {
+                    MemoryStream mS = new MemoryStream(myPhoto);
+                    pictureBox1.Image = System.Drawing.Bitmap.FromStream(mS);
+                }
+                enableControls();
+            }
+            else
+            {
+                MessageBox.Show("You must select a registry");
+            }
         }
 
         private void searchPicButton_Click(object sender, System.EventArgs e)
@@ -180,5 +234,43 @@ namespace Vista
             dt = userFromDB.bringUsers();//trayendo todos los usuarios
             usersDataGridView.DataSource = dt;//llenando el DataGridView con cada registro que se ingrese, edite o elimine
         }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            //validando que le user seleccione un registro, es decir, una fila o celda del dataGridView
+            if (usersDataGridView.SelectedRows.Count > 0)
+            {
+                //validando que el usuario realmente quiera eliminar el registro
+                DialogResult decision = MessageBox.Show("Are you sure you want to delete the registry?", "Delete Registry", MessageBoxButtons.YesNo);
+                //validando si el user presiona "Ok" o "Cancel"
+                if (decision == DialogResult.Yes)
+                {
+                    bool deleted = userFromDB.delete(usersDataGridView.CurrentRow.Cells["UserCode"].Value.ToString());// el codigo de usuario esta en el DataGrid
+                    if (deleted)
+                    {
+                        cleanControls();
+                        disableControls();
+                        bringUsersForm();//al traer los usuarios actualizados desde la DB, se actualiza el DATAGrid
+                        MessageBox.Show("The registry was successfully deleted");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("The registry could not be deleted");
+                }
+
+
+            }
+            else
+            {
+                MessageBox.Show("You must select a registry in the table");
+            }
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            bringUsersForm();//refrescando los posibles datos modificados desde el motor de DB 
+        }
+
     }
 }

@@ -41,8 +41,6 @@
             this.roleComboBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.activeCheckBox = new System.Windows.Forms.CheckBox();
-            this.searchPicButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.newButton = new System.Windows.Forms.Button();
             this.modButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
@@ -50,9 +48,13 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.usersDataGridView = new System.Windows.Forms.DataGridView();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.refreshButton = new System.Windows.Forms.Button();
+            this.searchPicButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.usersDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // codeTextBox
@@ -164,25 +166,6 @@
             this.activeCheckBox.TabIndex = 12;
             this.activeCheckBox.UseVisualStyleBackColor = true;
             // 
-            // searchPicButton
-            // 
-            this.searchPicButton.Image = global::Vista.Properties.Resources.search;
-            this.searchPicButton.Location = new System.Drawing.Point(543, 142);
-            this.searchPicButton.Name = "searchPicButton";
-            this.searchPicButton.Size = new System.Drawing.Size(21, 23);
-            this.searchPicButton.TabIndex = 14;
-            this.searchPicButton.UseVisualStyleBackColor = true;
-            this.searchPicButton.Click += new System.EventHandler(this.searchPicButton_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(348, 19);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(189, 146);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            // 
             // newButton
             // 
             this.newButton.Location = new System.Drawing.Point(19, 295);
@@ -216,13 +199,13 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Enabled = false;
             this.deleteButton.Location = new System.Drawing.Point(350, 295);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(104, 32);
             this.deleteButton.TabIndex = 18;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // cancelButton
             // 
@@ -249,11 +232,55 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // refreshButton
+            // 
+            this.refreshButton.BackColor = System.Drawing.Color.Transparent;
+            this.refreshButton.Image = global::Vista.Properties.Resources.refresh;
+            this.refreshButton.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.refreshButton.Location = new System.Drawing.Point(519, 217);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(32, 32);
+            this.refreshButton.TabIndex = 21;
+            this.refreshButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.refreshButton.UseVisualStyleBackColor = false;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
+            // searchPicButton
+            // 
+            this.searchPicButton.Image = global::Vista.Properties.Resources.search;
+            this.searchPicButton.Location = new System.Drawing.Point(543, 142);
+            this.searchPicButton.Name = "searchPicButton";
+            this.searchPicButton.Size = new System.Drawing.Size(21, 23);
+            this.searchPicButton.TabIndex = 14;
+            this.searchPicButton.UseVisualStyleBackColor = true;
+            this.searchPicButton.Click += new System.EventHandler(this.searchPicButton_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(348, 19);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(189, 146);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(506, 252);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 18);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Refresh";
+            // 
             // UsersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(578, 599);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.usersDataGridView);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.deleteButton);
@@ -279,9 +306,9 @@
             this.Name = "UsersForm";
             this.Text = "Users";
             this.Load += new System.EventHandler(this.UsersForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,5 +337,7 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.DataGridView usersDataGridView;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Label label7;
     }
 }
