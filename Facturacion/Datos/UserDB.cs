@@ -200,7 +200,7 @@ namespace Datos
             return dt;//se devuelve el objeto "user" de  la clase "Usuario", para validar que todos los datos sean correctos a la hora de ingresar a la DB
         }
 
-        //creando metodo que permita traer la imagen del user desde la base de datos. Acoplar todo> ctrl+mo
+        //creando metodo que permita traer la imagen del user desde la base de datos. Acoplar todo> ctrl+m+o
         public byte[] photo(string userCode)//se traera mediante el codigo de usuario
         {
             byte[] photo = new byte[0];

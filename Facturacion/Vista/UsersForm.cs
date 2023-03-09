@@ -137,7 +137,7 @@ namespace Vista
                 {
                     cleanControls();
                     disableControls();
-                    bringUsersForm();
+                    bringUsersForm();//actualizando el DataGridView
                     MessageBox.Show("The registry has been saved");
                 }
                 else

@@ -46,6 +46,10 @@
             this.modButton = new System.Windows.Forms.Button();
             this.newButton = new System.Windows.Forms.Button();
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.activeCheckBox1 = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.refreshButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.productPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
@@ -150,11 +154,12 @@
             this.attachPicButton.Size = new System.Drawing.Size(21, 23);
             this.attachPicButton.TabIndex = 15;
             this.attachPicButton.UseVisualStyleBackColor = true;
+            this.attachPicButton.Click += new System.EventHandler(this.attachPicButton_Click);
             // 
             // productsDataGridView
             // 
             this.productsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.productsDataGridView.Location = new System.Drawing.Point(43, 244);
+            this.productsDataGridView.Location = new System.Drawing.Point(43, 271);
             this.productsDataGridView.Name = "productsDataGridView";
             this.productsDataGridView.Size = new System.Drawing.Size(547, 228);
             this.productsDataGridView.TabIndex = 26;
@@ -162,7 +167,7 @@
             // cancelButton
             // 
             this.cancelButton.Enabled = false;
-            this.cancelButton.Location = new System.Drawing.Point(486, 195);
+            this.cancelButton.Location = new System.Drawing.Point(486, 222);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(104, 32);
             this.cancelButton.TabIndex = 25;
@@ -172,18 +177,18 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Enabled = false;
-            this.deleteButton.Location = new System.Drawing.Point(374, 195);
+            this.deleteButton.Location = new System.Drawing.Point(374, 222);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(104, 32);
             this.deleteButton.TabIndex = 24;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // saveButton
             // 
             this.saveButton.Enabled = false;
-            this.saveButton.Location = new System.Drawing.Point(264, 195);
+            this.saveButton.Location = new System.Drawing.Point(264, 222);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(104, 32);
             this.saveButton.TabIndex = 23;
@@ -193,8 +198,7 @@
             // 
             // modButton
             // 
-            this.modButton.Enabled = false;
-            this.modButton.Location = new System.Drawing.Point(153, 195);
+            this.modButton.Location = new System.Drawing.Point(153, 222);
             this.modButton.Name = "modButton";
             this.modButton.Size = new System.Drawing.Size(104, 32);
             this.modButton.TabIndex = 22;
@@ -204,7 +208,7 @@
             // 
             // newButton
             // 
-            this.newButton.Location = new System.Drawing.Point(43, 195);
+            this.newButton.Location = new System.Drawing.Point(43, 222);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(104, 32);
             this.newButton.TabIndex = 21;
@@ -216,12 +220,58 @@
             // 
             this.errorProvider2.ContainerControl = this;
             // 
+            // activeCheckBox1
+            // 
+            this.activeCheckBox1.AutoSize = true;
+            this.activeCheckBox1.Location = new System.Drawing.Point(130, 164);
+            this.activeCheckBox1.Name = "activeCheckBox1";
+            this.activeCheckBox1.Size = new System.Drawing.Size(15, 14);
+            this.activeCheckBox1.TabIndex = 27;
+            this.activeCheckBox1.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label4.Location = new System.Drawing.Point(55, 165);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "Active";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label7.Location = new System.Drawing.Point(555, 195);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.TabIndex = 30;
+            this.label7.Text = "Refresh";
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.BackColor = System.Drawing.Color.Transparent;
+            this.refreshButton.Image = global::Vista.Properties.Resources.refresh;
+            this.refreshButton.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.refreshButton.Location = new System.Drawing.Point(558, 160);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(32, 32);
+            this.refreshButton.TabIndex = 29;
+            this.refreshButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.refreshButton.UseVisualStyleBackColor = false;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
             // ProductsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(646, 492);
+            this.ClientSize = new System.Drawing.Size(646, 517);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.refreshButton);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.activeCheckBox1);
             this.Controls.Add(this.productsDataGridView);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.deleteButton);
@@ -240,6 +290,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ProductsForm";
             this.Text = "Products";
+            this.Load += new System.EventHandler(this.ProductsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.productPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
@@ -267,5 +318,9 @@
         private System.Windows.Forms.Button modButton;
         private System.Windows.Forms.Button newButton;
         private System.Windows.Forms.ErrorProvider errorProvider2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox activeCheckBox1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button refreshButton;
     }
 }
