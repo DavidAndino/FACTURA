@@ -26,7 +26,9 @@ namespace Vista
 
         private void clientsToolStripButton_Click(object sender, EventArgs e)
         {
-
+            ClientsForm customer = new ClientsForm();
+            customer.MdiParent = this;
+            customer.Show();
         }
 
         private void salesToolStripButton_Click(object sender, EventArgs e)

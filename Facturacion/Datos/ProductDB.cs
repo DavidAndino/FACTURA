@@ -175,5 +175,41 @@ namespace Datos
 
             return dt;//se devuelve el objeto "user" de  la clase "Usuario", para validar que todos los datos sean correctos a la hora de ingresar a la DB
         }
+        public Product bringProductsForCode(string codeNumber)
+        {
+            Product product = null;
+            try
+            {
+                StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
+                sql.Append("SELECT * FROM product WHERE Code = @Code");//sentencia para traer registros de la tabla de la base de datos
+
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql
+                {
+                    conexion.Open();//abriendo conexion
+
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), conexion))
+                    {
+                        comando.CommandType = CommandType.Text;//*especificando el tipo de comando que se ejecutara
+                        MySqlDataReader dr = comando.ExecuteReader();//trayendo los datos
+                        //pasando a cada propiedad los datos que se guardan en el objeto "dr"
+                        if (dr.Read())
+                        {
+                            product = new Product();//instanciando objeto
+                            product.code = codeNumber;
+                            product.description = dr["Description"].ToString();
+                            product.stock = Convert.ToInt32(dr["Stock"]);
+                            product.price = Convert.ToDecimal(dr["Price"]);
+                            product.activeProduct = Convert.ToBoolean((dr["Active"]));
+                        }
+
+                    }//esta sentencia de comando ejecuta la sentencia de sql
+                }//esta sentencia ayuda a que, cuando termina la conexion con la DB, cerrar la conexion automatically
+            }
+            catch (Exception)
+            {
+            }
+
+            return product;//se devuelve el objeto "user" de  la clase "Usuario", para validar que todos los datos sean correctos a la hora de ingresar a la DB
+        }
     }
 }
