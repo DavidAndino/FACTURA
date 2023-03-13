@@ -77,6 +77,14 @@ namespace Vista
 
         private void saveButton_Click(object sender, System.EventArgs e)
         {
+            //modificando estados  de atributos de la clase usuario
+            user.userCode = codeTextBox.Text;
+            user.name = nameTextBox.Text;
+            user.password = passTextBox.Text;
+            user.role = roleComboBox.Text;
+            user.mail = mailTextBox.Text;
+            user.active = activeCheckBox.Checked;//la propiedad "checked" es de tipo booleano
+
             if (operation == "New")//decidiendo que hara el boton "save" 
             {
                 //validando que no haya campos vacios
@@ -113,13 +121,6 @@ namespace Vista
                 }
                 errorProvider1.Clear();
 
-                user.userCode = codeTextBox.Text;
-                user.name = nameTextBox.Text;
-                user.password = passTextBox.Text;
-                user.role = roleComboBox.Text;
-                user.mail = mailTextBox.Text;
-                user.active = activeCheckBox.Checked;//la propiedad "checked" es de tipo booleano
-
                 //psando imagen del pictureBox a la propiedad "Photo" de la clase "Usuario
                 if (pictureBox1.Image != null)
                 {
@@ -142,20 +143,13 @@ namespace Vista
                 }
                 else
                 {
-                    MessageBox.Show("The operation failed while trying to save the registry");
+                    MessageBox.Show("The process failed while trying to save the registry");
                 }
 
             }//decision de boton guardar o save
 
             else if (operation == "Mod")
             {
-                user.userCode = codeTextBox.Text;
-                user.name = nameTextBox.Text;
-                user.password = passTextBox.Text;
-                user.role = roleComboBox.Text;
-                user.mail = mailTextBox.Text;
-                user.active = activeCheckBox.Checked;//la propiedad "checked" es de tipo booleano
-
                 //psando imagen del pictureBox a la propiedad "Photo" de la clase "Usuario
                 if (pictureBox1.Image != null)
                 {
@@ -172,11 +166,11 @@ namespace Vista
                     cleanControls();
                     disableControls();
                     bringUsersForm();
-                    MessageBox.Show("The registry was updated successfully");
+                    MessageBox.Show("The registry has been updated successfully");
                 }
                 else
                 {
-                    MessageBox.Show("It was not possible to update the registry");
+                    MessageBox.Show("It has not been possible to update the registry");
                 }
             }
 
@@ -189,7 +183,7 @@ namespace Vista
             if (usersDataGridView.SelectedRows.Count > 0)//si el user selecciono al menos una fila
             {
                 //el orden de esto de llenar los textbox etc  de nuevo con los datos que hay en la celda seleccionada en el dataGrid, se hace con el de la DB en MySql
-                codeTextBox.Text = usersDataGridView.CurrentRow.Cells["UserCode"].Value.ToString();//pasando los datos que contiene la celda de la fila seleccionada
+                codeTextBox.Text = usersDataGridView.CurrentRow.Cells["UserCode"].Value.ToString();//pasando los datos que contiene cada columna de la fila seleccionada
                 nameTextBox.Text = usersDataGridView.CurrentRow.Cells["Name"].Value.ToString();
                 passTextBox.Text = usersDataGridView.CurrentRow.Cells["Password"].Value.ToString();
                 mailTextBox.Text = usersDataGridView.CurrentRow.Cells["Mail"].Value.ToString();
@@ -207,7 +201,7 @@ namespace Vista
             }
             else
             {
-                MessageBox.Show("You must select a registry");
+                MessageBox.Show("You must select a registry", "Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
