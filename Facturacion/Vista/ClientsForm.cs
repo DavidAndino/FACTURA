@@ -171,9 +171,10 @@ namespace Vista
 
         private void cancelButton_Click(object sender, System.EventArgs e)
         {
-            DialogResult decision = MessageBox.Show("Are you sure you want to cancel?", "Cancel operation", MessageBoxButtons.YesNo);
+            DialogResult decision = MessageBox.Show("Do you want to cancel the process", "Cancel Process", MessageBoxButtons.YesNo);
             if (decision == DialogResult.Yes)
             {
+                MessageBox.Show("The process has been cancelled", "Cancel operation", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 disableControls();
                 clearControls();
                 if (modButton.Enabled == false)//validando que el boton de modify quede activo si se apreta "New", pero luego se cancela
@@ -182,6 +183,7 @@ namespace Vista
                 }
                 errorProvider1.Clear();//eliminando advertencia que podrtia quedar en determinados casos
             }
+
 
         }//programar pregunta
 
