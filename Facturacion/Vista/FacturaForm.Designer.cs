@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
             this.userTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.clientsNameTextBox = new System.Windows.Forms.TextBox();
+            this.findClientButton = new System.Windows.Forms.Button();
             this.clientIdTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.findClientButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.productCodeTextBox = new System.Windows.Forms.TextBox();
-            this.findProductbutton = new System.Windows.Forms.Button();
-            this.productDescripTextBox = new System.Windows.Forms.TextBox();
-            this.stockTextBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.amountTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.stockTextBox = new System.Windows.Forms.TextBox();
+            this.productDescripTextBox = new System.Windows.Forms.TextBox();
+            this.findProductbutton = new System.Windows.Forms.Button();
+            this.productCodeTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.productRegistriesTataGridView1 = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -77,16 +77,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // label1
+            // dateTimePicker1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(332, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "NEW BILL";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(568, 12);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(120, 24);
+            this.dateTimePicker1.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label3.Location = new System.Drawing.Point(514, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 18);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Date:";
             // 
             // userTextBox
             // 
@@ -108,28 +116,20 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "User:";
             // 
-            // label3
+            // label1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(514, 15);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 18);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Date:";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(568, 12);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(120, 24);
-            this.dateTimePicker1.TabIndex = 5;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(332, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(118, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "NEW BILL";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.clientsNameTextBox);
             this.groupBox2.Controls.Add(this.findClientButton);
             this.groupBox2.Controls.Add(this.clientIdTextBox);
             this.groupBox2.Controls.Add(this.label4);
@@ -142,6 +142,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Client\'s Info";
             // 
+            // clientsNameTextBox
+            // 
+            this.clientsNameTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.clientsNameTextBox.Location = new System.Drawing.Point(244, 23);
+            this.clientsNameTextBox.Name = "clientsNameTextBox";
+            this.clientsNameTextBox.ReadOnly = true;
+            this.clientsNameTextBox.Size = new System.Drawing.Size(444, 24);
+            this.clientsNameTextBox.TabIndex = 9;
+            // 
+            // findClientButton
+            // 
+            this.findClientButton.Location = new System.Drawing.Point(214, 24);
+            this.findClientButton.Name = "findClientButton";
+            this.findClientButton.Size = new System.Drawing.Size(24, 23);
+            this.findClientButton.TabIndex = 8;
+            this.findClientButton.Text = "button1";
+            this.findClientButton.UseVisualStyleBackColor = true;
+            this.findClientButton.Click += new System.EventHandler(this.findClientButton_Click);
+            // 
             // clientIdTextBox
             // 
             this.clientIdTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
@@ -149,6 +168,7 @@
             this.clientIdTextBox.Name = "clientIdTextBox";
             this.clientIdTextBox.Size = new System.Drawing.Size(139, 24);
             this.clientIdTextBox.TabIndex = 6;
+            this.clientIdTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.clientIdTextBox_KeyPress);
             // 
             // label4
             // 
@@ -160,24 +180,6 @@
             this.label4.Size = new System.Drawing.Size(29, 18);
             this.label4.TabIndex = 7;
             this.label4.Text = "ID:";
-            // 
-            // findClientButton
-            // 
-            this.findClientButton.Location = new System.Drawing.Point(214, 24);
-            this.findClientButton.Name = "findClientButton";
-            this.findClientButton.Size = new System.Drawing.Size(24, 23);
-            this.findClientButton.TabIndex = 8;
-            this.findClientButton.Text = "button1";
-            this.findClientButton.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBox1.Location = new System.Drawing.Point(244, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(444, 24);
-            this.textBox1.TabIndex = 9;
             // 
             // groupBox3
             // 
@@ -198,63 +200,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Products\' Info";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label5.Location = new System.Drawing.Point(11, 26);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 18);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Code:";
-            // 
-            // productCodeTextBox
-            // 
-            this.productCodeTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.productCodeTextBox.Location = new System.Drawing.Point(70, 23);
-            this.productCodeTextBox.Name = "productCodeTextBox";
-            this.productCodeTextBox.Size = new System.Drawing.Size(139, 24);
-            this.productCodeTextBox.TabIndex = 10;
-            // 
-            // findProductbutton
-            // 
-            this.findProductbutton.Location = new System.Drawing.Point(215, 24);
-            this.findProductbutton.Name = "findProductbutton";
-            this.findProductbutton.Size = new System.Drawing.Size(24, 23);
-            this.findProductbutton.TabIndex = 10;
-            this.findProductbutton.Text = "button1";
-            this.findProductbutton.UseVisualStyleBackColor = true;
-            // 
-            // productDescripTextBox
-            // 
-            this.productDescripTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.productDescripTextBox.Location = new System.Drawing.Point(244, 23);
-            this.productDescripTextBox.Name = "productDescripTextBox";
-            this.productDescripTextBox.ReadOnly = true;
-            this.productDescripTextBox.Size = new System.Drawing.Size(444, 24);
-            this.productDescripTextBox.TabIndex = 10;
-            // 
-            // stockTextBox
-            // 
-            this.stockTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.stockTextBox.Location = new System.Drawing.Point(253, 63);
-            this.stockTextBox.Name = "stockTextBox";
-            this.stockTextBox.ReadOnly = true;
-            this.stockTextBox.Size = new System.Drawing.Size(41, 24);
-            this.stockTextBox.TabIndex = 11;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label6.Location = new System.Drawing.Point(195, 66);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 18);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Stock:";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -274,6 +219,63 @@
             this.amountTextBox.Name = "amountTextBox";
             this.amountTextBox.Size = new System.Drawing.Size(41, 24);
             this.amountTextBox.TabIndex = 13;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label6.Location = new System.Drawing.Point(195, 66);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 18);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Stock:";
+            // 
+            // stockTextBox
+            // 
+            this.stockTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.stockTextBox.Location = new System.Drawing.Point(253, 63);
+            this.stockTextBox.Name = "stockTextBox";
+            this.stockTextBox.ReadOnly = true;
+            this.stockTextBox.Size = new System.Drawing.Size(41, 24);
+            this.stockTextBox.TabIndex = 11;
+            // 
+            // productDescripTextBox
+            // 
+            this.productDescripTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.productDescripTextBox.Location = new System.Drawing.Point(244, 23);
+            this.productDescripTextBox.Name = "productDescripTextBox";
+            this.productDescripTextBox.ReadOnly = true;
+            this.productDescripTextBox.Size = new System.Drawing.Size(444, 24);
+            this.productDescripTextBox.TabIndex = 10;
+            // 
+            // findProductbutton
+            // 
+            this.findProductbutton.Location = new System.Drawing.Point(215, 24);
+            this.findProductbutton.Name = "findProductbutton";
+            this.findProductbutton.Size = new System.Drawing.Size(24, 23);
+            this.findProductbutton.TabIndex = 10;
+            this.findProductbutton.Text = "button1";
+            this.findProductbutton.UseVisualStyleBackColor = true;
+            // 
+            // productCodeTextBox
+            // 
+            this.productCodeTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.productCodeTextBox.Location = new System.Drawing.Point(70, 23);
+            this.productCodeTextBox.Name = "productCodeTextBox";
+            this.productCodeTextBox.Size = new System.Drawing.Size(139, 24);
+            this.productCodeTextBox.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label5.Location = new System.Drawing.Point(11, 26);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 18);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Code:";
             // 
             // productRegistriesTataGridView1
             // 
@@ -406,7 +408,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FacturaForm";
             this.Text = "FacturaForm";
             this.groupBox1.ResumeLayout(false);
@@ -430,7 +432,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox clientsNameTextBox;
         private System.Windows.Forms.Button findClientButton;
         private System.Windows.Forms.TextBox clientIdTextBox;
         private System.Windows.Forms.Label label4;

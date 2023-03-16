@@ -95,6 +95,7 @@ namespace Vista
             customer.phone = phoneTextBox.Text;
             customer.personalMail = mailTextBox.Text;
             customer.addres = addresTextBox.Text;
+            customer.birthDate = Convert.ToDateTime(clientsDateTimePicker1.Text);
             customer.active = activeCheckBox.Checked;
 
             if (operation == "New")
@@ -158,7 +159,12 @@ namespace Vista
                 phoneTextBox.Text = clientsDataGridView.CurrentRow.Cells["Phone"].Value.ToString();
                 mailTextBox.Text = clientsDataGridView.CurrentRow.Cells["PersonalMail"].Value.ToString();
                 addresTextBox.Text = clientsDataGridView.CurrentRow.Cells["Addres"].Value.ToString();
-                //pendiente fecha  nacimiento
+
+                //validando que la fecha no traiga un valor nulo. Esta validacion permite al IDE aceptar valores nulos de fecha de nacimiento de la base de datos, y no mostrara una excepcion
+                if (clientsDataGridView.CurrentRow.Cells["BirthDate"].Value != DBNull.Value)
+                {
+                    clientsDateTimePicker1.Value = Convert.ToDateTime(clientsDataGridView.CurrentRow.Cells["BirthDate"].Value);
+                }
                 activeCheckBox.Checked = Convert.ToBoolean(clientsDataGridView.CurrentRow.Cells["Active"].Value);
                 enableControls();
             }

@@ -33,7 +33,9 @@ namespace Vista
 
         private void salesToolStripButton_Click(object sender, EventArgs e)
         {
-
+            FacturaForm link = new FacturaForm();//instanciando object que permitira acceder al FacturaForm
+            link.MdiParent = this;
+            link.Show();
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Datos
                     using (MySqlCommand comando = new MySqlCommand(sql.ToString(), conexion))
                     {
                         comando.CommandType = CommandType.Text;//*especificando el tipo de comando que se ejecutara
+                        comando.Parameters.Add("@Id", MySqlDbType.VarChar, 13).Value = id;
                         MySqlDataReader dr = comando.ExecuteReader();//trayendo los datos
                         //pasando a cada propiedad los datos que se guardan en el objeto "dr"
                         if (dr.Read())
@@ -73,7 +74,7 @@ namespace Datos
                         comando.Parameters.Add("@Phone", MySqlDbType.VarChar, 15).Value = customer.phone;
                         comando.Parameters.Add("@PersonalMail", MySqlDbType.VarChar, 45).Value = customer.personalMail;
                         comando.Parameters.Add("@Addres", MySqlDbType.VarChar, 100).Value = customer.addres;
-                        comando.Parameters.Add("@BirthDate", MySqlDbType.DateTime).Value = customer.birthDate;
+                        comando.Parameters.Add("@BirthDate", MySqlDbType.Date).Value = customer.birthDate;//ojo Date
                         comando.Parameters.Add("@Active", MySqlDbType.Bit).Value = customer.active;
                         comando.ExecuteNonQuery();//se va a ejecutar, pero no se devolvera algun registro
                         inserted = true;
@@ -85,7 +86,7 @@ namespace Datos
             {
             }
 
-            return inserted;//
+            return inserted;
         }
         public bool edit(Client customer)
         {
@@ -95,7 +96,7 @@ namespace Datos
                 StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
                 sql.Append(" UPDATE client SET ");//sentencia para editar algun registro
 
-                sql.Append(" Name = @Name, Phone = @Phone, PersonalMail = @PersonalMail, Addres = @Addres, Active = @Active ");//sentencias para editar todos los registros en la DB
+                sql.Append(" Name = @Name, Phone = @Phone, PersonalMail = @PersonalMail, Addres = @Addres, BirthDate = @BirthDate, Active = @Active ");//sentencias para editar todos los registros en la DB
                 sql.Append(" WHERE Id = @Id; ");//solo permitiendo que se edite un cliente por un Id especificado
 
                 using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql
@@ -112,7 +113,7 @@ namespace Datos
                         comando.Parameters.Add("@Phone", MySqlDbType.VarChar, 15).Value = customer.phone;
                         comando.Parameters.Add("@PersonalMail", MySqlDbType.VarChar, 45).Value = customer.personalMail;
                         comando.Parameters.Add("@Addres", MySqlDbType.VarChar, 100).Value = customer.addres;
-                        comando.Parameters.Add("@BirthDate", MySqlDbType.DateTime).Value = customer.birthDate;
+                        comando.Parameters.Add("@BirthDate", MySqlDbType.Date).Value = customer.birthDate;
                         comando.Parameters.Add("@Active", MySqlDbType.Bit).Value = customer.active;
                         comando.ExecuteNonQuery();//se va a ejecutar, pero no se devolvera algun registro
                         edited = true;
@@ -182,7 +183,37 @@ namespace Datos
             {
             }
 
-            return dt;//se devuelve el objeto "user" de  la clase "Usuario", para validar que todos los datos sean correctos a la hora de ingresar a la DB
+            return dt;
+        }
+        //creando metodo que consultara el FindClientForm, para que lo que el cajero escriba coincida con registros de clientes en la tabla
+        public DataTable bringClientsForName(string name)
+        {
+            DataTable dt = new DataTable();//instanciando objeto de esta clase
+            try
+            {
+                StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
+                sql.Append("SELECT * FROM client WHERE Name LIKE ('%@Name%'); ");/*LIKE filtra todos los resultados que sean iguales o contegan 
+                                                                           el valor del nombre que se trae en el parametro "name@ 
+                el simbolo de resto duplicado permite buscar varios elementos en el nombre de una Entidad (nombres, apellidos etc) a la vez*/
+
+                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql
+                {
+                    conexion.Open();//abriendo conexion
+
+                    using (MySqlCommand comando = new MySqlCommand(sql.ToString(), conexion))
+                    {
+                        comando.CommandType = CommandType.Text;//*especificando el tipo de comando que se ejecutara
+                        comando.Parameters.Add("@Name", MySqlDbType.VarChar, 50).Value = name;
+                        MySqlDataReader dr = comando.ExecuteReader();//trayendo los datos
+                        dt.Load(dr);//llenando el objeto de tipo "DataTable" con los registros almacenados en el objeto "dr" 
+                    }//esta sentencia de comando ejecuta la sentencia de sql
+                }//esta sentencia ayuda a que, cuando termina la conexion con la DB, se cierre la conexion automatically
+            }
+            catch (System.Exception)
+            {
+            }
+
+            return dt;
         }
     }
 

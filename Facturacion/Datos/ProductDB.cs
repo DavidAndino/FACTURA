@@ -190,6 +190,7 @@ namespace Datos
                     using (MySqlCommand comando = new MySqlCommand(sql.ToString(), conexion))
                     {
                         comando.CommandType = CommandType.Text;//*especificando el tipo de comando que se ejecutara
+                        comando.Parameters.Add("@ProductCode", MySqlDbType.VarChar, 80).Value = codeNumber;
                         MySqlDataReader dr = comando.ExecuteReader();//trayendo los datos
                         //pasando a cada propiedad los datos que se guardan en el objeto "dr"
                         if (dr.Read())
