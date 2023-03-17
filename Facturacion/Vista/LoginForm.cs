@@ -48,6 +48,14 @@ namespace Vista
             {
                 if (user.active)
                 {
+                    //codigo necesario para que el codigo de usuario se muestre en el textBox "User" de la factura
+                    System.Security.Principal.GenericIdentity iD = new System.Security.Principal.GenericIdentity(user.userCode);/*la clase "GenericId"
+                                                                                                       permite generar una autenticacion. El parametro es el codigo de user
+                                                                                                       que se ingresa en el login*/
+                    //pasando el GenericIdentity al GenericPrincipal
+                    System.Security.Principal.GenericPrincipal principal = new System.Security.Principal.GenericPrincipal(iD, new string[] { user.role });//el 2do parametro es el rol o arreglo de roles, este cuando el user tiene varios roles (admin y user)
+                    System.Threading.Thread.CurrentPrincipal = principal;//pasando el GenericPrincipal al CurrentPrincipal
+
                     //Mostrar menu
                     MenuForm menuFormulario = new MenuForm();//instanciando objeto de la clase Menu
                     this.Hide();//ocultando formulario de login
@@ -72,10 +80,12 @@ namespace Vista
             if (passTextBox.PasswordChar == '*')//mostrando contrasenia
             {
                 passTextBox.PasswordChar = '\0';//enviando a la propiedad "PasswordChar" el valor nulo. Esta contrapleca iguala a null
+                passTextBox.Focus();
             }
             else
             {
                 passTextBox.PasswordChar = '*';//volviendo a ocultar contra
+                passTextBox.Focus();
             }
         }
     }

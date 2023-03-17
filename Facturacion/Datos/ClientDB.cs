@@ -74,7 +74,7 @@ namespace Datos
                         comando.Parameters.Add("@Phone", MySqlDbType.VarChar, 15).Value = customer.phone;
                         comando.Parameters.Add("@PersonalMail", MySqlDbType.VarChar, 45).Value = customer.personalMail;
                         comando.Parameters.Add("@Addres", MySqlDbType.VarChar, 100).Value = customer.addres;
-                        comando.Parameters.Add("@BirthDate", MySqlDbType.Date).Value = customer.birthDate;//ojo Date
+                        comando.Parameters.Add("@BirthDate", MySqlDbType.DateTime).Value = customer.birthDate;//ojo Date
                         comando.Parameters.Add("@Active", MySqlDbType.Bit).Value = customer.active;
                         comando.ExecuteNonQuery();//se va a ejecutar, pero no se devolvera algun registro
                         inserted = true;
@@ -113,7 +113,7 @@ namespace Datos
                         comando.Parameters.Add("@Phone", MySqlDbType.VarChar, 15).Value = customer.phone;
                         comando.Parameters.Add("@PersonalMail", MySqlDbType.VarChar, 45).Value = customer.personalMail;
                         comando.Parameters.Add("@Addres", MySqlDbType.VarChar, 100).Value = customer.addres;
-                        comando.Parameters.Add("@BirthDate", MySqlDbType.Date).Value = customer.birthDate;
+                        comando.Parameters.Add("@BirthDate", MySqlDbType.DateTime).Value = customer.birthDate;
                         comando.Parameters.Add("@Active", MySqlDbType.Bit).Value = customer.active;
                         comando.ExecuteNonQuery();//se va a ejecutar, pero no se devolvera algun registro
                         edited = true;

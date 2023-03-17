@@ -30,7 +30,7 @@ namespace Datos
                                                                                                                                 */
                 //sentencia para actualizar stock
                 StringBuilder sqlStock = new StringBuilder();
-                sqlStock.Append(" UPDATE product SET Stock = Stock - @Amount WHERE Code = @Code ");
+                sqlStock.Append(" UPDATE product SET Stock = Stock - @Amount WHERE Code = @Code; ");
 
                 using (MySqlConnection connection = new MySqlConnection(cadenaConexion))
                 {
@@ -75,7 +75,7 @@ namespace Datos
                             {
                                 command3.CommandType = System.Data.CommandType.Text;
                                 command3.Parameters.Add("@Amount", MySqlDbType.Int32).Value = detail.amount;
-                                command3.Parameters.Add("@ProductCode", MySqlDbType.VarChar, 80).Value = detail.productCode;//producto code se guarda en el item "detail", en cada iteracion
+                                command3.Parameters.Add("@ProductCode", MySqlDbType.VarChar, 80).Value = detail.productCode;//productocode se guarda en el item "detail", en cada iteracion
                                 command3.ExecuteNonQuery();
                             }
                         }

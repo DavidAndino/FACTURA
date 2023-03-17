@@ -14,7 +14,7 @@ namespace Entidades
         public bool active { get; set; }
         public byte[] photo { get; set; }
 
-        //creando constructor vaio
+        //creando constructor vacio
         public Usuario()
         {
 

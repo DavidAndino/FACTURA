@@ -48,7 +48,7 @@
             this.findProductbutton = new System.Windows.Forms.Button();
             this.productCodeTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.productRegistriesTataGridView1 = new System.Windows.Forms.DataGridView();
+            this.productRegistriesTataGridView = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -62,7 +62,7 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productRegistriesTataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productRegistriesTataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -153,11 +153,11 @@
             // 
             // findClientButton
             // 
+            this.findClientButton.Image = global::Vista.Properties.Resources.search;
             this.findClientButton.Location = new System.Drawing.Point(214, 24);
             this.findClientButton.Name = "findClientButton";
             this.findClientButton.Size = new System.Drawing.Size(24, 23);
             this.findClientButton.TabIndex = 8;
-            this.findClientButton.Text = "button1";
             this.findClientButton.UseVisualStyleBackColor = true;
             this.findClientButton.Click += new System.EventHandler(this.findClientButton_Click);
             // 
@@ -219,6 +219,7 @@
             this.amountTextBox.Name = "amountTextBox";
             this.amountTextBox.Size = new System.Drawing.Size(41, 24);
             this.amountTextBox.TabIndex = 13;
+            this.amountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.amountTextBox_KeyPress);
             // 
             // label6
             // 
@@ -251,12 +252,15 @@
             // 
             // findProductbutton
             // 
+            this.findProductbutton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.findProductbutton.Image = global::Vista.Properties.Resources.search;
             this.findProductbutton.Location = new System.Drawing.Point(215, 24);
             this.findProductbutton.Name = "findProductbutton";
             this.findProductbutton.Size = new System.Drawing.Size(24, 23);
             this.findProductbutton.TabIndex = 10;
-            this.findProductbutton.Text = "button1";
             this.findProductbutton.UseVisualStyleBackColor = true;
+            this.findProductbutton.Click += new System.EventHandler(this.findProductbutton_Click);
             // 
             // productCodeTextBox
             // 
@@ -265,6 +269,7 @@
             this.productCodeTextBox.Name = "productCodeTextBox";
             this.productCodeTextBox.Size = new System.Drawing.Size(139, 24);
             this.productCodeTextBox.TabIndex = 10;
+            this.productCodeTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.productCodeTextBox_KeyPress);
             // 
             // label5
             // 
@@ -277,13 +282,16 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Code:";
             // 
-            // productRegistriesTataGridView1
+            // productRegistriesTataGridView
             // 
-            this.productRegistriesTataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.productRegistriesTataGridView1.Location = new System.Drawing.Point(23, 279);
-            this.productRegistriesTataGridView1.Name = "productRegistriesTataGridView1";
-            this.productRegistriesTataGridView1.Size = new System.Drawing.Size(702, 138);
-            this.productRegistriesTataGridView1.TabIndex = 4;
+            this.productRegistriesTataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.productRegistriesTataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.productRegistriesTataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productRegistriesTataGridView.Location = new System.Drawing.Point(23, 279);
+            this.productRegistriesTataGridView.Name = "productRegistriesTataGridView";
+            this.productRegistriesTataGridView.Size = new System.Drawing.Size(702, 138);
+            this.productRegistriesTataGridView.TabIndex = 4;
             // 
             // label8
             // 
@@ -378,6 +386,7 @@
             // 
             // saveButton
             // 
+            this.saveButton.Enabled = false;
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.Location = new System.Drawing.Point(33, 530);
             this.saveButton.Name = "saveButton";
@@ -402,7 +411,7 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.productRegistriesTataGridView1);
+            this.Controls.Add(this.productRegistriesTataGridView);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label1);
@@ -411,13 +420,14 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FacturaForm";
             this.Text = "FacturaForm";
+            this.Load += new System.EventHandler(this.FacturaForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productRegistriesTataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productRegistriesTataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -445,7 +455,7 @@
         private System.Windows.Forms.Button findProductbutton;
         private System.Windows.Forms.TextBox productCodeTextBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView productRegistriesTataGridView1;
+        private System.Windows.Forms.DataGridView productRegistriesTataGridView;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
