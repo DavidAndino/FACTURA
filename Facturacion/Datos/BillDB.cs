@@ -17,15 +17,15 @@ namespace Datos
             try
             {
                 StringBuilder sqlBill = new StringBuilder();//sentencia q permite crear varias sentencias separadas, es decir, danto enter
-
-                sqlBill.Append(" INSERT INTO bill VALUES (@Id, @Date, @IdClient, @UserCode, @SalesTax, @Discount, @Subtotal, @Total); ");/*dentro de los ( ) van los atributos 
+                //es necesario pasar encabezados (columnas) o campos cuando la llave primaria es autoincrementable
+                sqlBill.Append(" INSERT INTO bill (Date, IdClient, UserCode, Subtotal, SalesTax, Discount, Total) VALUES (@Date, @IdClient, @UserCode, @Subtotal, @SalesTax, @Discount, @Total); ");/*dentro de los ( ) van los atributos 
                                                               de la entidad en la tabla de la DB
                                                             */
                 sqlBill.Append(" SELECT LAST_INSERT_ID(); ");/*sentencia de Mysql que permite capturar el Id del producto que se acaba de geenerar. Devuelve la ultima PK (ID) de
                                                                de la tabla o registro que se acaba de  insertar en el programa
                                                               */
                 StringBuilder sqlBillDetail = new StringBuilder();
-                sqlBillDetail.Append(" INSERT INTO  billdetail VALUES (@Id, @IdBill, @ProductCode, @Price, @Amount, @Total); ");/*sentencia para insertar el detalle, o sea,
+                sqlBillDetail.Append(" INSERT INTO billdetail (IdBill, ProductCode, Price, Amount, Total) VALUES (@IdBill, @ProductCode, @Price, @Amount, @Total); ");/*sentencia para insertar el detalle, o sea,
                                                                                                                                  los datos de los productos registrados en la factura en cuestion
                                                                                                                                 */
                 //sentencia para actualizar stock
@@ -49,9 +49,9 @@ namespace Datos
                             command1.Parameters.Add("@Date", MySqlDbType.DateTime).Value = charge.date;
                             command1.Parameters.Add("@IdClient", MySqlDbType.VarChar, 13).Value = charge.idClient;
                             command1.Parameters.Add("@UserCode", MySqlDbType.VarChar, 50).Value = charge.userCode;
+                            command1.Parameters.Add("@Subtotal", MySqlDbType.Decimal).Value = charge.subtotal;
                             command1.Parameters.Add("@SalesTax", MySqlDbType.Decimal).Value = charge.salesTax;
                             command1.Parameters.Add("@Discount", MySqlDbType.Decimal).Value = charge.discount;
-                            command1.Parameters.Add("@Subtotal", MySqlDbType.Decimal).Value = charge.subtotal;
                             command1.Parameters.Add("@Total", MySqlDbType.Decimal).Value = charge.total;
                             idBill = Convert.ToInt32(command1.ExecuteScalar());//el metodo "ExecuteScalar" trae el valor del id de la ultima factura,
                                                                                //y luego se le asigna ese valor a la variable idBill
@@ -75,7 +75,7 @@ namespace Datos
                             {
                                 command3.CommandType = System.Data.CommandType.Text;
                                 command3.Parameters.Add("@Amount", MySqlDbType.Int32).Value = detail.amount;
-                                command3.Parameters.Add("@ProductCode", MySqlDbType.VarChar, 80).Value = detail.productCode;//productocode se guarda en el item "detail", en cada iteracion
+                                command3.Parameters.Add("@Code", MySqlDbType.VarChar, 80).Value = detail.productCode;//productcode se guarda en el item "detail", en cada iteracion
                                 command3.ExecuteNonQuery();
                             }
                         }

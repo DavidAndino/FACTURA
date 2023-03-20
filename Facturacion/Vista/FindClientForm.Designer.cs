@@ -79,6 +79,7 @@
             // clientsDataGridView
             // 
             this.clientsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.clientsDataGridView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clientsDataGridView.Location = new System.Drawing.Point(37, 107);
             this.clientsDataGridView.Name = "clientsDataGridView";
             this.clientsDataGridView.Size = new System.Drawing.Size(694, 252);

@@ -192,7 +192,7 @@ namespace Datos
             try
             {
                 StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
-                sql.Append("SELECT * FROM client WHERE Name LIKE ('%@Name%'); ");/*LIKE filtra todos los resultados que sean iguales o contegan 
+                sql.Append("SELECT * FROM client WHERE Name LIKE '%" + name + "%'");/*LIKE filtra todos los resultados que sean iguales o contegan 
                                                                            el valor del nombre que se trae en el parametro "name@ 
                 el simbolo de resto duplicado permite buscar varios elementos en el nombre de una Entidad (nombres, apellidos etc) a la vez*/
 

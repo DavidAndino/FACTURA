@@ -39,6 +39,7 @@
             // productsDataGridView
             // 
             this.productsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productsDataGridView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.productsDataGridView.Location = new System.Drawing.Point(53, 90);
             this.productsDataGridView.Name = "productsDataGridView";
             this.productsDataGridView.Size = new System.Drawing.Size(694, 252);

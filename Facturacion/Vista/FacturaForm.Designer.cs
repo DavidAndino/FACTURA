@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.billDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.userTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,15 +60,17 @@
             this.label11 = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productRegistriesTataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.billDateTimePicker);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.userTextBox);
             this.groupBox1.Controls.Add(this.label2);
@@ -77,13 +80,13 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // dateTimePicker1
+            // billDateTimePicker
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(568, 12);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(120, 24);
-            this.dateTimePicker1.TabIndex = 5;
+            this.billDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.billDateTimePicker.Location = new System.Drawing.Point(568, 12);
+            this.billDateTimePicker.Name = "billDateTimePicker";
+            this.billDateTimePicker.Size = new System.Drawing.Size(120, 24);
+            this.billDateTimePicker.TabIndex = 5;
             // 
             // label3
             // 
@@ -153,6 +156,7 @@
             // 
             // findClientButton
             // 
+            this.findClientButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.findClientButton.Image = global::Vista.Properties.Resources.search;
             this.findClientButton.Location = new System.Drawing.Point(214, 24);
             this.findClientButton.Name = "findClientButton";
@@ -254,6 +258,7 @@
             // 
             this.findProductbutton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.findProductbutton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.findProductbutton.Image = global::Vista.Properties.Resources.search;
             this.findProductbutton.Location = new System.Drawing.Point(215, 24);
             this.findProductbutton.Name = "findProductbutton";
@@ -286,8 +291,9 @@
             // 
             this.productRegistriesTataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.productRegistriesTataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.productRegistriesTataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.productRegistriesTataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productRegistriesTataGridView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.productRegistriesTataGridView.Location = new System.Drawing.Point(23, 279);
             this.productRegistriesTataGridView.Name = "productRegistriesTataGridView";
             this.productRegistriesTataGridView.Size = new System.Drawing.Size(702, 138);
@@ -375,6 +381,8 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cancelButton.Enabled = false;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.cancelButton.Location = new System.Drawing.Point(130, 530);
@@ -383,9 +391,11 @@
             this.cancelButton.TabIndex = 22;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // saveButton
             // 
+            this.saveButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.saveButton.Enabled = false;
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.Location = new System.Drawing.Point(33, 530);
@@ -394,6 +404,12 @@
             this.saveButton.TabIndex = 23;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.RightToLeft = true;
             // 
             // FacturaForm
             // 
@@ -428,6 +444,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productRegistriesTataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -436,7 +453,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker billDateTimePicker;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox userTextBox;
         private System.Windows.Forms.Label label2;
@@ -466,5 +483,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

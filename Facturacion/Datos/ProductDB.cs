@@ -218,8 +218,8 @@ namespace Datos
             try
             {
                 StringBuilder sql = new StringBuilder();//armando sentencia Sql through un objeto
-                sql.Append("SELECT * FROM product WHERE Description LIKE ('%@Description%'); ");/*LIKE filtra todos los resultados que sean iguales o contegan 
-                                                                           el valor del nombre que se trae en el parametro "name" 
+                sql.Append("SELECT * FROM product WHERE Description LIKE '%" + description + "%'");/*LIKE filtra todos los resultados que sean iguales o contegan 
+                                                                           el valor de la description que se trae en el parametro "descripcion" 
                 el simbolo de resto duplicado permite buscar varios elementos en el nombre de una Entidad (nombres, apellidos etc) a la vez*/
 
                 using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))//pasando un objeto de la conexion hacia MySql

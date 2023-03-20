@@ -8,9 +8,9 @@ namespace Entidades
         public DateTime date { get; set; }
         public string idClient { get; set; }//FK
         public string userCode { get; set; }//FK
+        public Decimal subtotal { get; set; }
         public Decimal salesTax { get; set; }//duda sintaxis "Decimal"
         public Decimal discount { get; set; }
-        public Decimal subtotal { get; set; }
         public Decimal total { get; set; }
 
         public Bill()
