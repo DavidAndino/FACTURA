@@ -173,9 +173,6 @@ namespace Vista
             {
                 MessageBox.Show("An error ocurred while saving the current bill", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-
         }
         private void clearControls()
         {

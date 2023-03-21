@@ -124,7 +124,7 @@ namespace Vista
                     clearControls();
                     disableControls();
                     bringClientsForm();
-                    MessageBox.Show("The registry has been saved", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("The registry has been saved successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -213,7 +213,7 @@ namespace Vista
                         clearControls();
                         disableControls();
                         bringClientsForm();//al traer los usuarios actualizados desde la DB, se actualiza el DATAGrid
-                        MessageBox.Show("The registry was successfully deleted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("The registry has been deleted successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
